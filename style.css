@@ -303,8 +303,8 @@ body {
   background: white;
   padding: 25px;
   border-radius: 20px;
-  max-width: 320px;
-  width: 85%;
+  max-width: 360px;
+  width: 90%;
   text-align: center;
   position: relative;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -330,12 +330,14 @@ body {
   color: #000;
 }
 
+/* AJUSTE PARA MOSTRAR LA FOTO COMPLETA SIN RECORTE */
 .modal-contenido img {
   width: 100%;
-  max-height: 200px;
-  object-fit: cover;
+  max-height: 320px;
+  object-fit: contain; /* Garantiza que la imagen se vea completa */
   border-radius: 12px;
   margin-bottom: 15px;
+  background-color: #f8f9fa; /* Fondo suave por si la foto es más angosta */
 }
 
 .modal-texto {
