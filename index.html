@@ -1,132 +1,48 @@
-// 10 frases únicas para 8 pétalos grandes + 2 hojas
-const datosFrases = [
-  { frase: "Eres mi todo, mi princesa mágica, te amo inmensamente 🌻", foto: "foto1.jpg.jpeg" },
-  { frase: "Tu sonrisa hace todos los dias mas bonitos e iluminan mis dias ✨", foto: "foto2.jpg.jpeg" },
-  { frase: "Gracias por estar a mi lado, me haces muy feliz amorshito ❤️", foto: "foto3.jpg.jpeg" },
-  { frase: "Siempre brillas a cada lugar que vas, mi princesa 🌟", foto: "foto4.jpg.jpeg" },
-  { frase: "Eres la mujer con la que siempre quiero compartir todo 💕", foto: "foto5.jpg.jpeg" },
-  { frase: "Cada momento junto a ti es mágico e inolvidable ⏳💛", foto: "foto6.jpg.jpeg" },
-  { frase: "Que pues mamasita, eres la flor mas hermosa que existe 🌸", foto: "foto7.jpg.jpeg" },
-  { frase: "El mundo se detiene siempre al lado tuyo uwu 🌍❤️", foto: "foto8.jpg.jpeg" },
-  { frase: "Nunca olvides lo valiosa que eres para mí, amor mio ✨", foto: "foto9.jpg.jpeg" },
-  { frase: "Te amo muchísimo mi cucha🌻", foto: "foto10.jpg.jpeg" }
-];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deshoja el Girasol 🌻</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Sacramento&display=swap" rel="stylesheet" />
+</head>
+<body>
 
-const girasolContainer = document.getElementById('girasolContainer');
-const modal = document.getElementById('modalFrase');
-const modalTexto = document.getElementById('modalTexto');
-const modalImagen = document.getElementById('modalImagen');
-const cerrarModal = document.getElementById('cerrarModal');
-const btnReiniciar = document.getElementById('btnReiniciar');
-const btnMusica = document.getElementById('btnMusica');
-const musicaFondo = document.getElementById('musicaFondo');
+  <!-- Audio MP3 de fondo -->
+  <audio id="musicaFondo" loop src="cancion.mp3"></audio>
 
-let musicaSonando = false;
-let frasesDisponibles = [];
+  <!-- Botón de música -->
+  <button id="btnMusica" class="btn-musica">🎵 Reproducir Música</button>
 
-// Control del MP3
-btnMusica.addEventListener('click', () => {
-  if (musicaSonando) {
-    musicaFondo.pause();
-    btnMusica.textContent = '🎵 Reproducir Música';
-  } else {
-    musicaFondo.play();
-    btnMusica.textContent = '⏸️ Pausar Música';
-  }
-  musicaSonando = !musicaSonando;
-});
+  <!-- Abejas y Mariposas Flotantes en el Fondo -->
+  <div class="bicho mariposa m1">🦋</div>
+  <div class="bicho mariposa m2">🦋</div>
+  <div class="bicho abeja a1">🐝</div>
+  <div class="bicho abeja a2">🐝</div>
 
-// Mezclador para garantizar que ninguna frase se repita
-function mezclarFrases() {
-  frasesDisponibles = [...datosFrases];
-  frasesDisponibles.sort(() => Math.random() - 0.5);
-}
+  <header class="header">
+    <h1>🌻 Deshoja el Girasol 🌻</h1>
+    <p>Haz clic en cada pétalo u hoja para descubrir un mensaje especial con foto.</p>
+  </header>
 
-// Construcción de la flor
-function construirGirasol() {
-  girasolContainer.innerHTML = '';
-  mezclarFrases();
+  <main class="contenedor-principal">
+    <div id="girasolContainer" class="girasol-container"></div>
+  </main>
 
-  // 1. Tallo
-  const tallo = document.createElement('div');
-  tallo.className = 'tallo';
-  girasolContainer.appendChild(tallo);
+  <div class="controles">
+    <button id="btnReiniciar" class="btn-reiniciar">🔄 Volver a Armar el Girasol</button>
+  </div>
 
-  // 2. Hoja Izquierda
-  const hojaIzquierda = document.createElement('div');
-  hojaIzquierda.className = 'hoja-tallo hoja-izquierda';
-  hojaIzquierda.addEventListener('click', (e) => quitarElemento(e.target));
-  girasolContainer.appendChild(hojaIzquierda);
+  <!-- Modal emergente para las fotos y frases -->
+  <div id="modalFrase" class="modal oculto">
+    <div class="modal-contenido">
+      <span id="cerrarModal" class="cerrar">&times;</span>
+      <img id="modalImagen" src="" alt="Foto especial" />
+      <p id="modalTexto" class="modal-texto"></p>
+    </div>
+  </div>
 
-  // 3. Hoja Derecha
-  const hojaDerecha = document.createElement('div');
-  hojaDerecha.className = 'hoja-tallo hoja-derecha';
-  hojaDerecha.addEventListener('click', (e) => quitarElemento(e.target));
-  girasolContainer.appendChild(hojaDerecha);
-
-  // 4. Exactamente 8 Pétalos Grandes
-  const totalPetalos = 8;
-  for (let i = 0; i < totalPetalos; i++) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'petalo-wrapper';
-    const angulo = (360 / totalPetalos) * i;
-    wrapper.style.transform = `rotate(${angulo}deg)`;
-
-    const petalo = document.createElement('div');
-    petalo.className = 'petalo';
-    petalo.addEventListener('click', (e) => quitarElemento(e.target));
-    
-    wrapper.appendChild(petalo);
-    girasolContainer.appendChild(wrapper);
-  }
-
-  // 5. Centro del Girasol
-  const centro = document.createElement('div');
-  centro.className = 'centro-girasol';
-  girasolContainer.appendChild(centro);
-}
-
-// Al quitar pétalo u hoja
-function quitarElemento(elemento) {
-  if (!musicaSonando) {
-    musicaFondo.play().then(() => {
-      musicaSonando = true;
-      btnMusica.textContent = '⏸️ Pausar Música';
-    }).catch(() => {});
-  }
-
-  elemento.classList.add('cayendo');
-
-  if (frasesDisponibles.length === 0) {
-    mezclarFrases();
-  }
-
-  // Se extrae la frase para evitar repeticiones
-  const datoSeleccionado = frasesDisponibles.pop();
-
-  setTimeout(() => {
-    modalTexto.textContent = datoSeleccionado.frase;
-    modalImagen.src = datoSeleccionado.foto;
-    modal.classList.remove('oculto');
-  }, 350);
-
-  setTimeout(() => {
-    elemento.remove();
-  }, 1000);
-}
-
-// Eventos de Modal
-cerrarModal.addEventListener('click', () => {
-  modal.classList.add('oculto');
-});
-
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.classList.add('oculto');
-  }
-});
-
-btnReiniciar.addEventListener('click', construirGirasol);
-
-// Carga inicial
-construirGirasol();
+  <script src="script.js"></script>
+</body>
+</html>
