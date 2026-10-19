@@ -1,0 +1,346 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle, #fffde7 0%, #fff59d 60%, #fbc02d 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-musica {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: #f57c00;
+  color: white;
+  border: 2px solid #e65100;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s, background 0.3s;
+  z-index: 100;
+}
+
+.btn-musica:hover {
+  transform: scale(1.05);
+  background: #e65100;
+}
+
+.header {
+  text-align: center;
+  margin-top: 10px;
+  z-index: 10;
+}
+
+.header h1 {
+  font-family: 'Sacramento', cursive;
+  font-size: 3.2rem;
+  color: #3e2723;
+}
+
+.header p {
+  font-size: 1rem;
+  color: #5d4037;
+  margin-top: 5px;
+}
+
+/* --- ANIMACIONES DE ABEJAS Y MARIPOSAS --- */
+.bicho {
+  position: absolute;
+  font-size: 2rem;
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+}
+
+.mariposa.m1 {
+  top: 15%;
+  left: 10%;
+  animation: volarMariposa1 9s infinite ease-in-out;
+}
+
+.mariposa.m2 {
+  top: 40%;
+  right: 12%;
+  animation: volarMariposa2 11s infinite ease-in-out;
+}
+
+.abeja.a1 {
+  top: 25%;
+  right: 20%;
+  animation: zumbido1 6s infinite ease-in-out;
+}
+
+.abeja.a2 {
+  top: 60%;
+  left: 15%;
+  animation: zumbido2 8s infinite ease-in-out;
+}
+
+@keyframes volarMariposa1 {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(40px, -30px) rotate(15deg) scale(1.1); }
+  50% { transform: translate(80px, 20px) rotate(-10deg) scale(0.95); }
+  75% { transform: translate(30px, 50px) rotate(20deg) scale(1.05); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+@keyframes volarMariposa2 {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate(-60px, 40px) rotate(-20deg) scale(1.05); }
+  66% { transform: translate(-20px, -50px) rotate(15deg) scale(0.9); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+
+@keyframes zumbido1 {
+  0% { transform: translate(0, 0) scale(0.9); }
+  20% { transform: translate(-30px, -20px) scale(1); }
+  40% { transform: translate(20px, -40px) scale(0.95); }
+  60% { transform: translate(-10px, 30px) scale(1.05); }
+  80% { transform: translate(30px, 10px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(0.9); }
+}
+
+@keyframes zumbido2 {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(50px, -40px) scale(1.1); }
+  50% { transform: translate(20px, -80px) scale(0.9); }
+  75% { transform: translate(-30px, -20px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Contenedor central */
+.contenedor-principal {
+  position: relative;
+  width: 440px;
+  height: 520px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.girasol-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Tallo */
+.tallo {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 18px;
+  height: 270px;
+  background: #388e3c;
+  border: 2px solid #1b5e20;
+  border-radius: 9px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Hojas verdes */
+.hoja-tallo {
+  position: absolute;
+  width: 85px;
+  height: 48px;
+  background: #4caf50;
+  border: 2px solid #1b5e20;
+  border-radius: 80% 0 80% 0;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s ease, filter 0.2s;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
+}
+
+.hoja-tallo:hover {
+  filter: brightness(1.15);
+  transform: scale(1.05);
+}
+
+/* Hoja izquierda inclinada hacia abajo */
+.hoja-izquierda {
+  bottom: 110px;
+  left: calc(50% - 82px);
+  transform-origin: right center;
+  transform: rotate(20deg);
+}
+
+/* Hoja derecha apuntando recta hacia afuera */
+.hoja-derecha {
+  bottom: 130px;
+  right: calc(50% - 82px);
+  transform-origin: left center;
+  transform: scaleX(-1) rotate(-10deg);
+}
+
+/* Centro marrón del girasol */
+.centro-girasol {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, #5d4037 20%, #3e2723 70%, #271c19 100%);
+  border: 4px solid #1c0f0d;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.8), 0 6px 12px rgba(0,0,0,0.25);
+}
+
+.centro-girasol::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border: 2px dashed #a1887f;
+  border-radius: 50%;
+}
+
+/* Pétalos GRANDES */
+.petalo-wrapper {
+  position: absolute;
+  top: 145px;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  transform-origin: center center;
+}
+
+.petalo {
+  position: absolute;
+  bottom: 0;
+  left: -32px;
+  width: 64px;
+  height: 165px;
+  background: linear-gradient(to top, #ff9100, #ffea00);
+  border: 2.5px solid #f57f17;
+  border-radius: 50% 50% 50% 50% / 85% 85% 15% 15%;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s, filter 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+  transform-origin: center bottom;
+}
+
+.petalo:hover {
+  filter: brightness(1.15);
+}
+
+/* Animación de caída */
+.cayendo {
+  animation: deshojar 1s forwards ease-in;
+  pointer-events: none;
+}
+
+@keyframes deshojar {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(140px) rotate(45deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(380px) rotate(120deg);
+    opacity: 0;
+  }
+}
+
+.btn-reiniciar {
+  background: #f57c00;
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(245, 124, 0, 0.4);
+  transition: transform 0.2s;
+  z-index: 10;
+}
+
+.btn-reiniciar:hover {
+  transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.oculto {
+  display: none;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 320px;
+  width: 85%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.cerrar {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+}
+
+.cerrar:hover {
+  color: #000;
+}
+
+.modal-contenido img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.modal-texto {
+  font-size: 1.05rem;
+  color: #3e2723;
+  font-weight: 600;
+  line-height: 1.4;
+}
